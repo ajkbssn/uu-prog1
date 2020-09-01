@@ -1,4 +1,8 @@
 # /src/uu_prog1/ma1/dizzyTurtles.py
+"""
+functions to move turtles randomly
+script to draw square and follow turtles
+"""
 
 #  import turtle
 import random
@@ -8,10 +12,18 @@ from flags import rectangle
 from flags import make_turtle
 
 
-def random_turtle(side=500, new_rectangle=True):
+def random_turtle(side=500, draw_square=True):
+    """return a turtle with random direction withn a square, square can be drawn or not"""
     half_side = side / 2
-    if new_rectangle:
-        rectangle(-half_side, -half_side, side, side, "cornsilk", "dark grey")
+    if draw_square:
+        rectangle(
+            -half_side,
+            -half_side,
+            side,
+            side,
+            fill_color="cornsilk",
+            line_color="dark grey",
+        )
     start_pos_x = random.randint(-half_side, half_side)
     start_pos_y = random.randint(-half_side, half_side)
     t = make_turtle(start_pos_x, start_pos_y)
@@ -31,9 +43,9 @@ def move_random(t):
 #  for i in range(250):
 #      move_random(t)
 
-t = random_turtle()
+t = random_turtle(draw_square=True)
 t.color("dark blue")
-u = random_turtle(new_rectangle=False)
+u = random_turtle(draw_square=False)
 u.color("red")
 for _ in range(500):
     if t.distance(u) < 50:
