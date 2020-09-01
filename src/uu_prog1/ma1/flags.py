@@ -31,10 +31,15 @@ def rectangle(x, y, width, height, fill_color="black", line_color="black"):
 
 def tricolore(x, y, h):
     """draw the French flag"""
+    # specs from https://en.wikipedia.org/wiki/Flag_of_France
+    # official colors blue, white and red with hex representation
+    fr_blu = "#0055a4"
+    fr_wht = "#ffffff"
+    fr_red = "#ef4135"
     w = h / 2  # each rectangle width half height to get a 2:3 flag
-    rectangle(x, y, w, h, fill_color="blue", line_color="")
-    rectangle(x + w, y, w, h, "white", "light grey")
-    rectangle(x + 2 * w, y, w, h, "red", "")
+    rectangle(x, y, w, h, fill_color=fr_blu, line_color="")
+    rectangle(x + w, y, w, h, fr_wht, "light grey")
+    rectangle(x + 2 * w, y, w, h, fr_red, "")
 
 
 def pentagram_v1(x, y, side):
@@ -108,5 +113,5 @@ def vietnamese_flag(x, y, height):
 
 def main():
     """Assignment 1 & 2, lesson 5, Computer Programming I, UU, fall 2020"""
-    french_flag_with_stars(0, 0, 200)
-    vietnamese_flag(-400, -400, 200)
+    french_flag_with_stars(-50, -50, 200)
+    vietnamese_flag(-300, -300, 200)
