@@ -13,7 +13,7 @@ from flags import make_turtle
 
 
 def random_turtle(side=500, draw_square=True):
-    """return a turtle with random direction withn a square, square can be drawn or not"""
+    """return a turtle with random direction within a square, square can be drawn or not"""
     half_side = side / 2
     if draw_square:
         rectangle(
