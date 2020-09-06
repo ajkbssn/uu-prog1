@@ -115,3 +115,6 @@ def main():
     """Assignment 1 & 2, lesson 5, Computer Programming I, UU, fall 2020"""
     french_flag_with_stars(-50, -50, 200)
     vietnamese_flag(-300, -300, 200)
+
+
+main()
