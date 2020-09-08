@@ -30,5 +30,6 @@ def smooth_a(a, n):
     return r
 
 
-print(smooth_a([1, 2, 3], 1))
+if __name__ == "__main__":
+    print(smooth_a([1, 2, 3], 1))
 

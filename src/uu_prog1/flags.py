@@ -117,4 +117,5 @@ def main():
     vietnamese_flag(-300, -300, 200)
 
 
-main()
+if __name__ == "__main__":
+    main()
