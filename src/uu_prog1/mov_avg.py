@@ -26,10 +26,11 @@ def smooth_a(a, n):
     r = []
     b = n * [a[0]] + a + n * [a[-1]] if a else a
     r = smooth_b(b, n)
-    r = r[n:-n]
+    r = r[n:-n] if n > 0 else r
     return r
 
 
 if __name__ == "__main__":
     print(smooth_a([1, 2, 3], 1))
+    print(smooth_a([1, 2, 6, 4, 5, 0, 1, 2], 0))
 
