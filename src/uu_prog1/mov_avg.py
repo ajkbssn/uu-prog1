@@ -1,9 +1,8 @@
-
 def smooth(a):
     res = []
     res.append(a[0])
-    for i in range(1, len(a)-1):
-        res.append(sum(a[i-1:i+2])/3)
+    for i in range(1, len(a) - 1):
+        res.append(sum(a[i - 1 : i + 2]) / 3)
     res.append(a[-1])
     return res
 
@@ -21,7 +20,11 @@ def smooth_b(a, n):
 
 def smooth_a(a, n):
     r = []
-    a = [n * a[0]] + a + [n * a[-1]] if a
-    r = smooth_b(a, n)
+    b = n * [a[0]] + a + n * [a[-1]] if a else a
+    r = smooth_b(b, n)
     r = r[n:-n]
     return r
+
+
+print(smooth_a([1, 2, 3], 1))
+
