@@ -12,6 +12,8 @@ def mean(m):
 
 
 def smooth_b(a, n):
+    assert type(n) is int
+    assert type(a) is list
     r = []
     for i in range(len(a)):
         r.append(mean(a[max(0, i - n) : min(len(a), 1 + i + n)]))
@@ -19,6 +21,8 @@ def smooth_b(a, n):
 
 
 def smooth_a(a, n):
+    assert type(n) is int
+    assert type(a) is list
     r = []
     b = n * [a[0]] + a + n * [a[-1]] if a else a
     r = smooth_b(b, n)
