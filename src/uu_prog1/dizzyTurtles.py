@@ -8,8 +8,8 @@ script to draw square and follow turtles
 import random
 
 #  from flags import jump
-from flags import rectangle
-from flags import make_turtle
+from .flags import rectangle
+from .flags import make_turtle
 
 
 def random_turtle(side=500, draw_square=True):
@@ -39,16 +39,21 @@ def move_random(t):
     t.forward(random.randint(0, 25))
 
 
-#  t = random_turtle(500)
-#  for i in range(250):
-#      move_random(t)
+def main():
+    #  t = random_turtle(500)
+    #  for i in range(250):
+    #      move_random(t)
 
-t = random_turtle(draw_square=True)
-t.color("dark blue")
-u = random_turtle(draw_square=False)
-u.color("red")
-for _ in range(500):
-    if t.distance(u) < 50:
-        t.write("close")
-    move_random(t)
-    move_random(u)
+    t = random_turtle(draw_square=True)
+    t.color("dark blue")
+    u = random_turtle(draw_square=False)
+    u.color("red")
+    for _ in range(500):
+        if t.distance(u) < 50:
+            t.write("close")
+        move_random(t)
+        move_random(u)
+
+
+if __name__ == "__main__":
+    main()
