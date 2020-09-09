@@ -14,7 +14,7 @@ import numpy as np
 import numpy.linalg as npl
 
 # Change OU2 by the name of the file containing your functions
-from uu_prog1.mov_avg import smooth_a, smooth_b
+from uu_prog1.mov_avg import smooth_a, smooth_b, round_list
 
 
 @pytest.fixture
