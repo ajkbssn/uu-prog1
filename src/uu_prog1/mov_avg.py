@@ -1,3 +1,6 @@
+# src/uu_prog1/mov_avg.py
+
+
 def smooth(a):
     res = []
     res.append(a[0])
@@ -30,7 +33,27 @@ def smooth_a(a, n):
     return r
 
 
-if __name__ == "__main__":
+def round_list(a_list, ndigits):
+    """
+    returns a new list of the numbers in a_list with numbers rounded up
+    to ndigits decimals.
+    Example:
+    round_list([1.23, 2.23, 6.88, 4, 5, 0, 1, 2], 1)
+            == [1.2, 2.3, 6.9, 4.0, 5.0, 0.0, 1.0, 2.0]
+    """
+    assert type(a_list) is list
+    assert type(ndigits) is int
+    new_list = [round(x, ndigits) for x in a_list]
+    return new_list
+
+
+def main():
     print(smooth_a([1, 2, 3], 1))
-    print(smooth_a([1, 2, 6, 4, 5, 0, 1, 2], 0))
+    print(smooth_a([1, 2, 6, 4, 5, 0, 1, 2], 2))
+    x = [1, 2, 6, 4, 5, 0, 1, 2]
+    assert round_list(smooth_a(x, 1), 2) == [1.33, 3.0, 4.0, 5.0, 3.0, 2.0, 1.0, 1.67]
+
+
+if __name__ == "__main__":
+    main()
 
