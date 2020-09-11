@@ -55,7 +55,7 @@ def pentagram_v1(x, y, side):
 def pentagram(x, y, side, fill_type=None, fill_color="black", line_color="black"):
     """
     draw a five-point star,
-    three fill types supported: "full", "outer" or None
+    fill_type supported: "full", "outer" or None
     """
     t = make_turtle(x, y, visible=False)
     t.color(line_color, fill_color)

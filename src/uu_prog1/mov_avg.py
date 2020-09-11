@@ -43,15 +43,15 @@ def round_list(a_list, ndigits):
     """
     assert type(a_list) is list
     assert type(ndigits) is int
-    new_list = [round(x, ndigits) for x in a_list]
-    return new_list
+    return [round(x, ndigits) for x in a_list]
 
 
 def main():
     print(smooth_a([1, 2, 3], 1))
-    print(smooth_a([1, 2, 6, 4, 5, 0, 1, 2], 2))
     x = [1, 2, 6, 4, 5, 0, 1, 2]
-    assert round_list(smooth_a(x, 1), 2) == [1.33, 3.0, 4.0, 5.0, 3.0, 2.0, 1.0, 1.67]
+    print(smooth_a(x, 2))
+    print(round_list(smooth_a(x, 1), 2))
+    # == [1.33, 3.0, 4.0, 5.0, 3.0, 2.0, 1.0, 1.67]
 
 
 if __name__ == "__main__":
