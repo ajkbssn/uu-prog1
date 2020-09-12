@@ -52,6 +52,7 @@ def lines_to_list(lines):
     return [word for word in list]
 
 
+@debug
 def main():
     top_n_common_words = int(
         input("How many words should be in the list of most common words?")
