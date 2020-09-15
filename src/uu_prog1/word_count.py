@@ -2,35 +2,22 @@
 
 import re
 import sys
-import functools
 
 
-def debug(func):
-    """Print the function signature and return value"""
-
-    @functools.wraps(func)
-    def wrapper_debug(*args, **kwargs):
-        args_repr = [repr(a) for a in args]  # 1
-        kwargs_repr = [f"{k}={v!r}" for k, v in kwargs.items()]  # 2
-        signature = ", ".join(args_repr + kwargs_repr)  # 3
-        print(f"Calling {func.__name__}({signature})")
-        value = func(*args, **kwargs)
-        print(f"{func.__name__!r} returned {value!r}")  # 4
-        return value
-
-    return wrapper_debug
-
-
-@debug
-def print_top_n(word_dict, n):
-    top_n = sorted(word_dict.items(), key=lambda x: -x[1])
+def print_top_n(word_dict, n, type="most"):
+    if type == "most":
+        top_n = sorted(word_dict.items(), key=lambda x: -x[1])
+    elif type == "least":
+        top_n = sorted(word_dict.items(), key=lambda x: x[1])
+    else:
+        print("sort type must be most or least, now items are not sorted")
+        # raise exception?
     if len(top_n) > n:
         top_n = top_n[:n]
     for word, freq in top_n:
         print(word.ljust(19), str(freq).rjust(5))
 
 
-@debug
 def count_words(words, stop_words=[]):
     """
     takes list of words and returns dict with words and word count
@@ -46,16 +33,20 @@ def count_words(words, stop_words=[]):
     return word_dict
 
 
-@debug
 def lines_to_list(lines):
-    list = [re.findall(r"[a-zA-ZåäöÅÄÖ]+", line) for line in lines]
-    return [word for word in list]
+    word_list = []
+    for line in lines:
+        word_list.extend(re.findall(r"[a-zA-ZåäöÅÄÖ]+", line))
+        word_list = [word.lower() for word in word_list]
+    return word_list
 
 
-@debug
 def main():
-    top_n_common_words = int(
+    most_n_common_words = int(
         input("How many words should be in the list of most common words?")
+    )
+    least_n_common_words = int(
+        input("How many words should be in the list of least common words?")
     )
 
     with open(sys.argv[1]) as f:
@@ -66,7 +57,10 @@ def main():
     unique_words = len(dict)
     print("Total number of words:", tot_no_words)
     print("Number of unique words:", unique_words)
-    print_top_n(dict, top_n_common_words)
+    print("\nList of most common words")
+    print_top_n(dict, most_n_common_words, "most")
+    print("\nList of least common words")
+    print_top_n(dict, least_n_common_words, "least")
 
 
 if __name__ == "__main__":

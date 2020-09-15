@@ -85,4 +85,3 @@ def letter_freq(text):
 def sorted_dict(text):
     lista = list(letter_freq(text).items())
     return lista.sort()
-
