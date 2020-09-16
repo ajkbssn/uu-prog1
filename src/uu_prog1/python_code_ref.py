@@ -27,7 +27,7 @@ def lines_to_dict(lines):
     dict = {}
     for row_no, line in enumerate(lines, start=1):
         pre_comment = re.sub(r"#.*$", "", line)
-        ref_list = re.findall(r"[a-zA-Z_]+", pre_comment)
+        ref_list = re.findall(r"[a-z\_A-Z]+", pre_comment)
         for ref in ref_list:
             if not ref in keyword.kwlist:
                 if ref in dict:
