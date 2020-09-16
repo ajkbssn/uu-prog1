@@ -1,4 +1,4 @@
-# src/uu_prog1/wordcount.py
+# src/uu_prog1/word_count.py
 
 import re
 import sys
