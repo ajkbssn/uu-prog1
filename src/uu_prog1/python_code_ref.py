@@ -29,9 +29,9 @@ def print_output(lines, dict):
     and a dict with symbols as keys and a list of line numbers as values
     to format output to std as stated in assignment
     """
-    for idx, line in enumerate(lines):
+    for idx, line in enumerate(lines, start=1):
         print(str(idx).rjust(4), line.strip("\n"))
-    print("\n\n")
+    print("\n\n\nReference list:")
     sd = sorted(dict.items())
     for symbol in sd:
         print(f"  {symbol[0]:18}    {symbol[1]}")
