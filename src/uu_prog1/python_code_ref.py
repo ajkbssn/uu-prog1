@@ -9,6 +9,7 @@ def lines_to_dict(lines):
     """
     takes a list of lines and returns a dict
     with symbols as keys and a list of line numbers as values
+    function is python specific filtering keyword.kwlist
     """
     dict = {}
     for row_no, line in enumerate(lines, start=1):
