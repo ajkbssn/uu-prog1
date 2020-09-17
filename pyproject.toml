@@ -14,7 +14,6 @@ flake8 = "^3.7.9"
 ipython = "^7.18.1"
 numpy = "^1.19.1"
 
-
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
