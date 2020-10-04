@@ -6,6 +6,7 @@ authors = ["Anders Jakobsson  <ajkbssn@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+matplotlib = "^3.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -13,6 +14,8 @@ black = "^19.10b0"
 flake8 = "^3.7.9"
 ipython = "^7.18.1"
 numpy = "^1.19.1"
+jupyter = "^1.0.0"
+blackcellmagic = "^0.0.2"
 
 [build-system]
 requires = ["poetry>=0.12"]
