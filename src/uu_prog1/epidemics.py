@@ -1,0 +1,21 @@
+# src/uu_prog1/epidemics.py
+
+import numpy as np
+
+
+def SIR(S0, I0, R0, a, b, T=100):
+    S = np.arange(T, dtype="float64")
+    I = np.arange(T, dtype="float64")
+    R = np.arange(T, dtype="float64")
+    t = np.arange(T, dtype="int64")
+
+    S[0] = S0
+    I[0] = I0
+    R[0] = R0
+
+    for n in range(1, T + 1):
+        S[n] = S[n - 1] - a * S[n - 1] * I[n - 1]
+        I[n] = I[n - 1] + a * S[n - 1] * I[n - 1] - b * I[n - 1]
+        R[n] = R[n - 1] + b * I[n - 1]
+    return S, I, R, t
+
