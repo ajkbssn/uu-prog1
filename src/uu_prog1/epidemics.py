@@ -13,7 +13,7 @@ def SIR(S0, I0, R0, a, b, T=100):
     S = np.zeros(T + 1, dtype="float64")
     I = np.zeros(T + 1, dtype="float64")
     R = np.zeros(T + 1, dtype="float64")
-    t = np.zeros(T + 1, dtype="int64")
+    t = np.arange(T + 1, dtype="int64")
 
     S[0] = S0
     I[0] = I0
