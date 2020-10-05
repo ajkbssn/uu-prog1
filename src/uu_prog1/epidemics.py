@@ -4,10 +4,16 @@ import numpy as np
 
 
 def SIR(S0, I0, R0, a, b, T=100):
-    S = np.arange(T, dtype="float64")
-    I = np.arange(T, dtype="float64")
-    R = np.arange(T, dtype="float64")
-    t = np.arange(T, dtype="int64")
+    """
+    SIR model function for back seat epidemiologists.
+    Takes initial susceptibles, infected, recovered, the rate of a susceptible becoming infected,
+    the recovery rate, and optionally how many periods the simulation shall run.
+    Returns four time series numpy arrays (susceptibles, infected, recovered, and time)
+    """
+    S = np.zeros(T + 1, dtype="float64")
+    I = np.zeros(T + 1, dtype="float64")
+    R = np.zeros(T + 1, dtype="float64")
+    t = np.zeros(T + 1, dtype="int64")
 
     S[0] = S0
     I[0] = I0
