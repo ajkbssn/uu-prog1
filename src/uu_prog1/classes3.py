@@ -48,7 +48,7 @@ class Money:
         return s
 
     def __repr__(self):
-        return f"Money({self.__str__()})"
+        return f"class Money(id(self),{self.__str__()})"
 
 
 class Account:
