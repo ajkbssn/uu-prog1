@@ -1,6 +1,6 @@
-
 import random
 import time
+
 """
     Dictionaries are mappings from a set of keys (of almost any type) to a set of values.
     Here, a dictionary from strings, to floating point numbers
@@ -29,6 +29,7 @@ import time
 
 # A dictionary built with a list
 
+
 def list_dict_find(lst, key):
     for i in range(len(lst)):
         (key_i, _) = lst[i]
@@ -36,8 +37,10 @@ def list_dict_find(lst, key):
             return i
     return -1
 
+
 def list_dict_contains(lst, key):
     return list_dict_find(lst, key) >= 0
+
 
 def list_dict_set(lst, key, value):
     ind = list_dict_find(lst, key)
@@ -46,12 +49,14 @@ def list_dict_set(lst, key, value):
     else:
         lst.append((key, value))
 
+
 def list_dict_get(lst, key):
     ind = list_dict_find(lst, key)
     if ind >= 0:
         return lst[ind][1]
     else:
-        raise IndexError(f'Key {key} not in dictionary.')
+        raise IndexError(f"Key {key} not in dictionary.")
+
 
 def list_dict_create(keys, values):
     lst = []
@@ -72,19 +77,24 @@ def list_dict_create(keys, values):
 
 # With built-in dictionary
 
+
 def dict_contains(d, key):
     return key in d
+
 
 def dict_set(d, key, value):
     d[key] = value
 
+
 def dict_get(d, key):
     return d[key]
+
 
 def dict_create(keys, values):
     # zip takes two lists and merges them into one
     # [x1, x2, x3] [y1, y2, y3] -> [(x1, y1), (x2, y2), (x3, y3)]
     return dict(zip(keys, values))
+
 
 """
     To gain some insight into how these efficient dictionaries can be implemented,
@@ -106,53 +116,61 @@ def dict_create(keys, values):
 
 # With manually constructed hash-table
 
+
 def hash_dict_contains(lst, key):
     h = hash(key) % len(lst)
     return list_dict_contains(lst[h], key)
+
 
 def hash_dict_set(lst, key, value):
     h = hash(key) % len(lst)
     list_dict_set(lst[h], key, value)
 
+
 def hash_dict_get(lst, key):
     h = hash(key) % len(lst)
     return list_dict_get(lst[h], key)
 
-def hash_dict_create(slots, keys = None, values = None):
+
+def hash_dict_create(slots, keys=None, values=None):
     lst = [[] for _ in range(slots)]
     if keys is not None:
         for i in range(len(keys)):
             hash_dict_set(lst, keys[i], values[i])
     return lst
 
+
 # Other functions
 
+
 def random_name():
-    s = ''
-    s += chr(random.randint(ord('A'), ord('Z')))
+    s = ""
+    s += chr(random.randint(ord("A"), ord("Z")))
 
     first_len = random.randint(1, 9)
 
     for _ in range(first_len):
-        s += chr(random.randint(ord('a'), ord('z')))
+        s += chr(random.randint(ord("a"), ord("z")))
 
-    s += ' '
-    s += chr(random.randint(ord('A'), ord('Z')))
+    s += " "
+    s += chr(random.randint(ord("A"), ord("Z")))
 
     second_len = random.randint(4, 11)
 
     for _ in range(second_len):
-        s += chr(random.randint(ord('a'), ord('z')))
-    
+        s += chr(random.randint(ord("a"), ord("z")))
+
     return s
 
+
 def random_license_plate():
-    s = ''
+    s = ""
     for _ in range(3):
-        s += chr(random.randint(ord('a'), ord('z')))
+        s += chr(random.randint(ord("a"), ord("z")))
     for _ in range(3):
-        s += chr(random.randint(ord('0'), ord('0') + 9))
+        s += chr(random.randint(ord("0"), ord("0") + 9))
     return s
+
 
 def generate_entries(n, d, add_func):
     for i in range(n):
@@ -161,11 +179,32 @@ def generate_entries(n, d, add_func):
 
         add_func(d, key, value)
 
+
 def part1():
     # Test input
 
-    test_keys = ['abc123', 'def456', 'ghi789', 'jkl321', 'mno123', 'pqr765', 'stu457', 'vwx245', 'xyz984']
-    test_values = ['Edgar Allan Poe', 'J.R.R. Tolkien', 'Nassim Taleb', 'Thomas Harris', 'Stephen King', 'George R.R. Martin', 'David Lynch', 'Stanley Kubrick', 'Ronnie James Dio']
+    test_keys = [
+        "abc123",
+        "def456",
+        "ghi789",
+        "jkl321",
+        "mno123",
+        "pqr765",
+        "stu457",
+        "vwx245",
+        "xyz984",
+    ]
+    test_values = [
+        "Edgar Allan Poe",
+        "J.R.R. Tolkien",
+        "Nassim Taleb",
+        "Thomas Harris",
+        "Stephen King",
+        "George R.R. Martin",
+        "David Lynch",
+        "Stanley Kubrick",
+        "Ronnie James Dio",
+    ]
 
     # Create dictionaries
 
@@ -173,7 +212,7 @@ def part1():
     py_dict = dict_create(test_keys, test_values)
     hash_dict = hash_dict_create(1024, test_keys, test_values)
 
-    #Test code
+    # Test code
 
     print(f'Look-up def456 from list_dict:     {list_dict_get(list_dict, "def456")}')
     print(f'Look-up def456 from built-in dict: {dict_get(py_dict, "def456")}')
@@ -181,9 +220,9 @@ def part1():
 
     # Add another item
 
-    list_dict_set(list_dict, 'adg147', 'Mick Jagger')
-    dict_set(py_dict, 'adg147', 'Mick Jagger')
-    hash_dict_set(hash_dict, 'adg147', 'Mick Jagger')
+    list_dict_set(list_dict, "adg147", "Mick Jagger")
+    dict_set(py_dict, "adg147", "Mick Jagger")
+    hash_dict_set(hash_dict, "adg147", "Mick Jagger")
 
     print(f'Look-up adg147 from list_dict:     {list_dict_get(list_dict, "adg147")}')
     print(f'Look-up adg147 from built-in dict: {dict_get(py_dict, "adg147")}')
@@ -207,24 +246,25 @@ def part1():
     generate_entries(N, list_dict, list_dict_set)
     second_time = time.time()
 
-    print(f'Time elapsed: {second_time-first_time}')
+    print(f"Time elapsed: {second_time-first_time}")
 
     random.seed(1000)
     first_time = time.time()
     generate_entries(N, py_dict, dict_set)
     second_time = time.time()
 
-    print(f'Time elapsed: {second_time-first_time}')
+    print(f"Time elapsed: {second_time-first_time}")
 
     random.seed(1000)
     first_time = time.time()
     generate_entries(N, hash_dict, hash_dict_set)
     second_time = time.time()
 
-    print(f'Time elapsed: {second_time-first_time}')
+    print(f"Time elapsed: {second_time-first_time}")
+
 
 def part2():
-    d = {'abc123': 'Edgar Allan Poe', 'def456': 'J.R.R. Tolkien'}
+    d = {"abc123": "Edgar Allan Poe", "def456": "J.R.R. Tolkien"}
     print(d)
 
     keys = list(d.keys())
@@ -234,24 +274,26 @@ def part2():
     print(values)
 
     for k, v in zip(d.keys(), d.values()):
-        print(f'This is a key {k} and this is a value {v}.')
+        print(f"This is a key {k} and this is a value {v}.")
 
     print(f'Key abc123 in dictionary: {"abc123" in d}')
     print(f'Key cba321 in dictionary: {"cba321" in d}')
 
+
 def part3():
-    s = set(('abc123', 'def456', 'ghi789'))
+    s = set(("abc123", "def456", "ghi789"))
 
     print(s)
 
     for key in s:
         print(key)
 
-    if 'ghi789' in s:
-        print('Key ghi789 is in s')
-    if 'cba321' in s:
-        print('Key cba321 is in s')
+    if "ghi789" in s:
+        print("Key ghi789 is in s")
+    if "cba321" in s:
+        print("Key cba321 is in s")
 
-#part1()
-#part2()
+
+# part1()
+# part2()
 part3()

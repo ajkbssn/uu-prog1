@@ -2,6 +2,10 @@
 
 import numpy as np
 
+SUSCEPTIBLE = 0
+INFECTED = 1
+RECOVERED = 2
+
 
 def SIR(S0, I0, R0, a, b, T=100):
     """
@@ -25,3 +29,12 @@ def SIR(S0, I0, R0, a, b, T=100):
         R[n] = R[n - 1] + b * I[n - 1]
     return S, I, R, t
 
+
+def createSIR2D():
+    pass
+    return False
+
+
+def plot2D_SIR():
+    pass
+    return False

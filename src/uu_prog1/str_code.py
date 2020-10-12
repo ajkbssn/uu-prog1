@@ -1,4 +1,3 @@
-
 import time
 
 # A poem by Edgar Allan Poe
@@ -50,18 +49,20 @@ And so, all the night-tide, I lie down by the side
    In her sepulchre there by the sea—
    In her tomb by the sounding sea."""
 
+
 def get_and_clean_lines(p):
     # Extract all lines into separate strings
-    lines = p.split('\n')
+    lines = p.split("\n")
 
     # Remove all beginning and trailing white-space
     lines = [line.strip() for line in lines if len(line.strip()) > 0]
 
     return lines
 
+
 def part1():
 
-    print(f'Length of poem in characters: {len(poem)}')
+    print(f"Length of poem in characters: {len(poem)}")
 
     # Split up the poem:
 
@@ -69,7 +70,9 @@ def part1():
 
     # Put it back into one string
 
-    poem_single_string = ' '.join(list_of_lines) # ', '.join(['a', 'b', 'c']) -> 'a, b, c'
+    poem_single_string = " ".join(
+        list_of_lines
+    )  # ', '.join(['a', 'b', 'c']) -> 'a, b, c'
 
     print(poem_single_string)
 
@@ -77,58 +80,63 @@ def part1():
 
     # how many occurrences of annabel lee?
 
-    name_count = poem_single_string.count('Annabel Lee')
+    name_count = poem_single_string.count("Annabel Lee")
 
-    print(f'Annabel Lee occurred {name_count} times.')
+    print(f"Annabel Lee occurred {name_count} times.")
 
-    sea_count = poem_single_string.count('sea')
+    sea_count = poem_single_string.count("sea")
 
-    print(f'sea occurred {sea_count} times.')
+    print(f"sea occurred {sea_count} times.")
 
     time.sleep(5)
+
 
 def mark_lines_with_word(list_of_lines, word, found_marker, not_found_marker):
     for i in range(len(list_of_lines)):
         # We could use find, or index with error handling, but since we don't care about where it is...
-        line_num_string = f'[{i+1:02d}]'
+        line_num_string = f"[{i+1:02d}]"
 
         if word in list_of_lines[i]:
             list_of_lines[i] = line_num_string + found_marker + list_of_lines[i]
         else:
             list_of_lines[i] = line_num_string + not_found_marker + list_of_lines[i]
 
+
 def part2():
     # Split up the poem:
 
     list_of_lines = get_and_clean_lines(poem)
-    
+
     list_of_lines_marked = list_of_lines.copy()
 
-    mark_lines_with_word(list_of_lines_marked, 'Annabel Lee', '*****', '     ')
+    mark_lines_with_word(list_of_lines_marked, "Annabel Lee", "*****", "     ")
 
     for line in list_of_lines_marked:
         print(line)
         time.sleep(0.3)
-#marked_poem = '\n'.join(list_of_lines_marked)
 
-#print(marked_poem)
+
+# marked_poem = '\n'.join(list_of_lines_marked)
+
+# print(marked_poem)
+
 
 def part3():
     def count_verses(p):
-        lines = p.split('\n')
+        lines = p.split("\n")
         print(lines)
-        
+
         empty_line_count = 1
-    
+
         for i in range(len(lines)):
             if len(lines[i].strip()) == 0:
                 empty_line_count += 1
         return empty_line_count
 
-    print(f'Verse count is {count_verses(poem)}.')
+    print(f"Verse count is {count_verses(poem)}.")
 
 
-#print(poem)
-#part1()
-#part2()
+# print(poem)
+# part1()
+# part2()
 part3()
