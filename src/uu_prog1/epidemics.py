@@ -1,6 +1,9 @@
 import numpy as np
+
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+
+
 import matplotlib.patches as mpatches
 import random
 
@@ -35,8 +38,18 @@ def SIRcmap(nc=-1):
     return ListedColormap(newcolors[:nc], name="SIR")
 
 
-def createSIR2D(rows, columns):
-    return np.ones((rows, columns), dtype=int) * SUSCEPTIBLE
+def createSIR2D(rows, columns, boundary=False):
+    if boundary:
+        new_grid = np.ones((rows + 2, columns + 2)) * SUSCEPTIBLE
+        for i in range(rows + 2):
+            new_grid[i, 0] = NON_HUMAN
+            new_grid[i, columns + 1] = NON_HUMAN
+        for i in range(1, columns + 1):
+            new_grid[0, i] = NON_HUMAN
+            new_grid[rows + 1, i] = NON_HUMAN
+    else:
+        new_grid = np.ones((rows, columns), dtype=int) * SUSCEPTIBLE
+    return new_grid
 
 
 def find_neighbors(grid, i, j):
@@ -75,22 +88,24 @@ def recover(grid, i, j, beta):
     return is_infected and random.random() < beta
 
 
-def plot2D_SIR(grid):
+def plot2D_SIR(grid, title=None, do_show=False):
     plt.imshow(grid, cmap=SIRcmap())
     plt.colorbar()
-    plt.show()
+    plt.title(title)
+    if do_show:
+        plt.show()
 
 
 def time_step(current_grid, alpha, beta):
-    rows = grid.shape[0]
-    columns = grid.shape[1]
+    rows = current_grid.shape[0]
+    columns = current_grid.shape[1]
     infected = []
     infecteds_neighbors = []
     for r in range(rows):
         for c in range(columns):
-            if grid(r, c) == INFECTED:
+            if current_grid[r, c] == INFECTED:
                 infected.append((r, c))
-                infecteds_neighbors.append(find_neighbors(current_grid, r, c))
+                infecteds_neighbors.extend(find_neighbors(current_grid, r, c))
     new_grid = current_grid.copy()
     for n in infected:
         if recover(current_grid, n[0], n[1], beta):
@@ -98,12 +113,32 @@ def time_step(current_grid, alpha, beta):
     for n in infecteds_neighbors:
         if infect(current_grid, n[0], n[1], alpha):
             new_grid[n[0], n[1]] = INFECTED
-
     return new_grid
 
 
-grid = createSIR2D(rows=8, columns=6)
-grid[4, 3] = INFECTED
-grid[3, 3] = RECOVERED
-print(find_neighbors(grid, 4, 3))
-plot2D_SIR(grid)
+def main():
+    T = 50
+    M = 8
+    N = 6
+    alpha = 0.2
+    beta = 0.15
+
+    # Initialize the grid
+    grid = createSIR2D(rows=M, columns=N, boundary=True)
+    grid[4, 3] = INFECTED
+    grids = []
+    grids.append(grid)
+
+    # Run the simulation
+    for n in range(T):
+        grid = time_step(grid, alpha, beta)
+        grids.append(grid)
+
+    # Plot the results
+    [plot2D_SIR(grids[t], title=f"week {t}") for t in np.arange(0, T + 1, T // 5)]
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
+
