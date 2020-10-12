@@ -30,7 +30,7 @@ def SIR(S0, I0, R0, a, b, T=100):
     return S, I, R, t
 
 
-def createSIR2D():
+def createSIR2D(rows=None, columns=None):
     pass
     return False
 
