@@ -43362,4 +43362,3 @@ def test_smooth_b_random():
         )
         < 1.0e-6
     )
-
