@@ -17,7 +17,7 @@ NON_HUMAN = 3
 label_list = ["SUSCEPTIBLE", "INFECTED", "RECOVERED", "NON_HUMAN"]
 
 
-def SIRcmap(nc=-1):
+def SIRcmap():  # nc = -1
     """ Create a discrete color map for the 2D SIR
     Parameters
     ----------
@@ -44,7 +44,7 @@ def SIRcmap(nc=-1):
         (0.1, 0.9, 0.1),  # R
         (0.1, 0.1, 0.9),  # no human
     )
-    return ListedColormap(newcolors[:nc], name="SIR")
+    return ListedColormap(newcolors, name="SIR")  # newcolors[:nc]
 
 
 def createSIR2D(rows, columns, boundary=False):
@@ -98,8 +98,10 @@ def recover(grid, i, j, beta):
 
 
 def plot2D_SIR(grid, title=None, do_show=False):
-    im = plt.imshow(grid, aspect="equal",)  # cmap=SIRcmap())
-    colors = [im.cmap(im.norm(value)) for value in range(len(label_list))]
+    im = plt.imshow(grid, aspect="equal", cmap=SIRcmap())
+    colors = [
+        im.cmap(im.norm(value)) for value in range(len(SIRcmap().colors))
+    ]  # stackoverflow
     patches = [
         mpatches.Patch(color=colors[i], label=label_list[i])
         for i in range(len(label_list))
