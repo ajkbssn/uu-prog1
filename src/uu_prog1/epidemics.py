@@ -14,7 +14,7 @@ RECOVERED = 2
 NON_HUMAN = 3
 
 
-labelList = ["SUSCEPTIBLE", "INFECTED", "RECOVERED", "NON_HUMAN"]
+label_list = ["SUSCEPTIBLE", "INFECTED", "RECOVERED", "NON_HUMAN"]
 
 
 def SIRcmap(nc=-1):
@@ -29,11 +29,20 @@ def SIRcmap(nc=-1):
         Contains 4 colors: 0-SUSCEPTIBLE, 1-INFECTED, 2-RECOVERED,
             3-NON_HUMAN
     """
+
+    """
     newcolors = (
         (0.9490196078431372, 0.9490196078431372, 0.9490196078431372),  # S
         (0.8941176470588236, 0.10196078431372549, 0.10980392156862745),  # I
         (0.21568627450980393, 0.49411764705882355, 0.7215686274509804),  # R
         (0.03515625, 0.27734375, 0.41015625),  # no human
+    )
+    """
+    newcolors = (
+        (0.9, 0.9, 0.9),  # S
+        (0.9, 0.1, 0.1),  # I
+        (0.1, 0.9, 0.1),  # R
+        (0.1, 0.1, 0.9),  # no human
     )
     return ListedColormap(newcolors[:nc], name="SIR")
 
@@ -89,8 +98,13 @@ def recover(grid, i, j, beta):
 
 
 def plot2D_SIR(grid, title=None, do_show=False):
-    plt.imshow(grid, cmap=SIRcmap())
-    plt.colorbar()
+    im = plt.imshow(grid, aspect="equal",)  # cmap=SIRcmap())
+    colors = [im.cmap(im.norm(value)) for value in range(len(label_list))]
+    patches = [
+        mpatches.Patch(color=colors[i], label=label_list[i])
+        for i in range(len(label_list))
+    ]
+    plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2)
     plt.title(title)
     if do_show:
         plt.show()
@@ -141,4 +155,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
