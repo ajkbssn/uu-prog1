@@ -30,7 +30,6 @@ def SIRcmap():  # nc = -1
             3-NON_HUMAN
     """
 
-    """
     newcolors = (
         (0.9490196078431372, 0.9490196078431372, 0.9490196078431372),  # S
         (0.8941176470588236, 0.10196078431372549, 0.10980392156862745),  # I
@@ -44,6 +43,7 @@ def SIRcmap():  # nc = -1
         (0.1, 0.9, 0.1),  # R
         (0.1, 0.1, 0.9),  # no human
     )
+    """
     return ListedColormap(newcolors, name="SIR")  # newcolors[:nc]
 
 
